@@ -6,11 +6,18 @@ import Head from 'next/head'
 const montserrat = Montserrat({ subsets: ['latin'], weight: ['400', '700'] });
 const oswald = Oswald({ subsets: ['latin'], weight: ['400', '500', '700'] });
 
+export const metadata = {
+  title: 'TIMOTHY FERGUSON | TLF NEXUS GROUP',
+  description: 'Timothy Ferguson\'s vCard.',
+  icons: {
+    icon: '/favicon.ico',
+  },
+};
+
 export default function RootLayout({ children }) {
 
   return (
     <html lang="en">
-      <Head>TIMOTHY FERGUSON | TLF NEXUS GROUP</Head>
       <body className={`${montserrat.className} ${oswald.className}`}>
         {children}
       </body>
