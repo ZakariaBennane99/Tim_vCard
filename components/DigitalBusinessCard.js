@@ -1,9 +1,23 @@
 'use client';
 
 import React from 'react';
-import { Smartphone, Mail, Briefcase, Globe, User } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { User } from 'lucide-react';
 
 const DigitalBusinessCard = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 660); 
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   const downloadVCard = () => {
     const vcard = `BEGIN:VCARD
 VERSION:3.0
@@ -18,12 +32,20 @@ END:VCARD`;
 
     const blob = new Blob([vcard], { type: "text/vcard;charset=utf-8" });
     const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = "timothy_ferguson.vcf";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    
+    if (isMobile) {
+      window.location.href = url; 
+    } else {
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = "timothy_ferguson.vcf";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    // Clean up the URL object
+    setTimeout(() => URL.revokeObjectURL(url), 100);
   };
 
   return (
