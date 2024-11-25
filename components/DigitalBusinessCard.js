@@ -51,7 +51,7 @@ END:VCARD`;
   return (
     <div className="container">
       <div className="card">
-        <img src="/images/profile.jpg" alt="Timothy Ferguson" className="profile-img" />
+        <img src="/images/profile.jpeg" alt="Timothy Ferguson" className="profile-img" />
         <h1 className="name">TIMOTHY FERGUSON</h1>
         <h2 className="title">FOUNDER & CEO</h2>
         
